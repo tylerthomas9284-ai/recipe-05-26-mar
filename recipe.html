@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Recipe - KitchenCravings</title>
+  <meta name="description" content="View detailed recipe with ingredients, instructions, and nutrition information.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <span class="logo-orange">Kitchen</span><span class="logo-green">Cravings</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="recipes.html" class="nav-link">Recipes</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    
+    <nav class="nav-mobile" id="mobile-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="recipes.html" class="nav-link">Recipes</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Recipe Detail -->
+  <section class="section section-gray">
+    <div class="container">
+      <div style="margin-bottom: 2rem;">
+        <a href="recipes.html" style="color: #ff7a00; display: inline-flex; align-items: center; gap: 0.5rem;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Recipes
+        </a>
+      </div>
+
+      <div id="recipe-content">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <div id="recipe-not-found" class="hidden" style="text-align: center; padding: 4rem;">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Recipe Not Found</h2>
+        <p style="color: #6b7280; margin-bottom: 2rem;">Sorry, we couldn't find the recipe you're looking for.</p>
+        <a href="recipes.html" class="btn btn-primary">Browse All Recipes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="text-orange">KitchenCravings</h3>
+          <p style="color: #d1d5db; font-size: 0.875rem;">Your go-to destination for simple, delicious, and reliable recipes.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <p style="color: #d1d5db; font-size: 0.875rem; margin-bottom: 0.5rem;">10222 Desert Sands St Ste 204, San Antonio, TX 78116</p>
+          <p style="color: #d1d5db; font-size: 0.875rem; margin-bottom: 0.5rem;"><a href="tel:+19253869877">+1-925-386-9877</a></p>
+          <p style="color: #d1d5db; font-size: 0.875rem;"><a href="mailto:help@kitchencravings.site">help@kitchencravings.site</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 KitchenCravings. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/recipes.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const recipeId = urlParams.get('id');
+    const recipeContent = document.getElementById('recipe-content');
+    const recipeNotFound = document.getElementById('recipe-not-found');
+
+    if (recipeId) {
+      const recipe = recipes.find(r => r.id === recipeId);
+      
+      if (recipe) {
+        document.getElementById('page-title').textContent = `${recipe.title} - KitchenCravings`;
+        
+        recipeContent.innerHTML = `
+          <div class="card" style="overflow: hidden;">
+            <img src="${recipe.image}" alt="${recipe.title}" style="width: 100%; height: 400px; object-fit: cover;">
+            <div style="padding: 2rem;">
+              <div style="margin-bottom: 1.5rem;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">${recipe.title}</h1>
+                <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 1rem;">${recipe.description}</p>
+                <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                  <div style="display: inline-block; background-color: #fed7aa; color: #ff7a00; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600;">
+                    ${recipe.difficulty}
+                  </div>
+                  <div style="color: #fbbf24; font-size: 1.25rem;">★ ${recipe.rating}</div>
+                </div>
+              </div>
+
+              <!-- Recipe Meta -->
+              <div style="background-color: #f9fafb; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem;">
+                <div class="grid grid-cols-2 grid-md-4" style="gap: 1.5rem; text-align: center;">
+                  <div>
+                    <div style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Prep Time</div>
+                    <div style="font-weight: 600; color: #1f2937;">${recipe.prepTime}</div>
+                  </div>
+                  <div>
+                    <div style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Cook Time</div>
+                    <div style="font-weight: 600; color: #1f2937;">${recipe.cookTime}</div>
+                  </div>
+                  <div>
+                    <div style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Servings</div>
+                    <div style="font-weight: 600; color: #1f2937;">${recipe.servings}</div>
+                  </div>
+                  <div>
+                    <div style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Calories</div>
+                    <div style="font-weight: 600; color: #1f2937;">${recipe.calories}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-md-2" style="gap: 2rem;">
+                <!-- Ingredients -->
+                <div>
+                  <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #ff7a00;">Ingredients</h2>
+                  <ul style="list-style: none; padding: 0;">
+                    ${recipe.ingredients.map(ingredient => `
+                      <li style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb; display: flex; align-items: start; gap: 0.5rem;">
+                        <svg width="20" height="20" fill="none" stroke="#16a34a" stroke-width="2" style="flex-shrink: 0; margin-top: 0.125rem;">
+                          <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>${ingredient}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+
+                <!-- Nutrition -->
+                <div>
+                  <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #ff7a00;">Nutrition Facts</h2>
+                  <div style="background-color: #f9fafb; border-radius: 0.5rem; padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                      <span style="font-weight: 600;">Calories</span>
+                      <span>${recipe.nutrition.calories}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                      <span style="font-weight: 600;">Protein</span>
+                      <span>${recipe.nutrition.protein}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                      <span style="font-weight: 600;">Carbohydrates</span>
+                      <span>${recipe.nutrition.carbs}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem 0;">
+                      <span style="font-weight: 600;">Fat</span>
+                      <span>${recipe.nutrition.fat}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Instructions -->
+              <div style="margin-top: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #ff7a00;">Instructions</h2>
+                <ol style="padding-left: 1.5rem;">
+                  ${recipe.instructions.map((instruction, index) => `
+                    <li style="margin-bottom: 1rem; line-height: 1.75;">
+                      <strong style="color: #ff7a00;">Step ${index + 1}:</strong> ${instruction}
+                    </li>
+                  `).join('')}
+                </ol>
+              </div>
+
+              <!-- Categories -->
+              <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span style="font-weight: 600; color: #6b7280;">Categories:</span>
+                  ${recipe.category.map(cat => `
+                    <span style="background-color: #f3f4f6; color: #374151; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem;">
+                      ${cat}
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        recipeContent.classList.add('hidden');
+        recipeNotFound.classList.remove('hidden');
+      }
+    } else {
+      recipeContent.classList.add('hidden');
+      recipeNotFound.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
